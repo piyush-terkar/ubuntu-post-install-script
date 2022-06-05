@@ -76,6 +76,10 @@ echo -e "${BLUE} INSTALLING NPM ${ENDCOLOR}"
 apt install npm -y
 npm -v
 echo -e "${GREEN} INSTALLED NPM ${ENDCOLOR}"
+echo -e "${BLUE} INSTALLING REACT ${ENDCOLOR}"
+npm -g install create-react-app
+create-react-app --version
+echo -e "${GREEN} INSTALLED REACT ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING NODEMON ${ENDCOLOR}"
 npm -g i nodemon
 echo -e "${GREEN} INSTALLED NODEMON ${ENDCOLOR}"
@@ -158,12 +162,12 @@ sudo -v
 apt install ubuntu-restricted-extras
 echo -e "${GREEN} ADDED UNIVERSAL CODECS ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING VLC MEDIA PLAYER ${ENDCOLOR}"
-snap install vlc -y
+snap install vlc
 sudo -v
 
 echo -e "${GREEN} INSTALLED VLC MEDIA PLAYER ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING VISUAL STUDIO CODE ${ENDCOLOR}"
-snap install code --classic -y
+snap install code --classic
 sudo -v
 
 echo -e "${GREEN} INSTALLED VISUAL STUDIO CODE ${ENDCOLOR}"
