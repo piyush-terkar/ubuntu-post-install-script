@@ -121,7 +121,10 @@ fi
 
 echo -e "${YELLOW}----------------------------------------- INSTALLING AND CONFIGURING BASIC DEVELOPMENT TOOLS AND SETTINGS -----------------------------------------"
 echo -e "${BLUE} INSTALLING GOOGLE CHROME ${ENDCOLOR}"
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+sudo -u $cuser wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+dpkg -i google-chrome-stable_current_amd64.deb
+rm google-chrome-stable_current_amd64.deb
+sudo -u $cuser wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
 apt install google-chrome-stable
 echo -e "${GREEN} INSTALLED GOOGLE CHROME ${ENDCOLOR}"
@@ -138,7 +141,7 @@ read email
 sudo -u $cuser git config --global user.email "$email"
 echo -e "${BLUE} Generating ssh key ${ENDCOLOR}"
 sudo -u $cuser ssh-keygen -t ed25519 -C "$email"
-cat ~/.ssh/id_ed25519.pub
+sudo -u $cuser cat /home/$cuser/.ssh/id_ed25519.pub
 echo -e "${BLUE} COPY ABOVE KEY TO YOUR GIT-HUB ACCOUNT TO COMPLETE THE CONFIGURATION ${ENDCOLOR}"
 echo -e "${BLUE} VISIT (ctrl + click to follow the link): ${ENDCOLOR} ${LIGHTB} https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
 sudo -u $cuser google-chrome https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
@@ -159,7 +162,7 @@ add-apt-repository multiverse -y
 apt update
 sudo -v
 
-apt install ubuntu-restricted-extras
+apt install ubuntu-restricted-extras -y
 echo -e "${GREEN} ADDED UNIVERSAL CODECS ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING VLC MEDIA PLAYER ${ENDCOLOR}"
 snap install vlc
@@ -174,7 +177,7 @@ echo -e "${GREEN} INSTALLED VISUAL STUDIO CODE ${ENDCOLOR}"
 
 echo -e "${YELLOW}----------------------------------------- INSTALLING DATABASES -----------------------------------------"
 echo -e "${BLUE} INSTALLING MYSQL ${ENDCOLOR}"
-apt install mysql-server
+apt install mysql-server -y
 sudo -v
 
 systemctl enable mysql-server
