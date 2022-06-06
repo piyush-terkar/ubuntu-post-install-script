@@ -21,44 +21,44 @@ sudo -u $cuser source .bashrc
 echo -e "${GREEN} INSTALLED APT-FAST ${ENDCOLOR}"
 sudo -v
 echo -e "${BLUE} PERFORMING FRESH BOOT UPGRADE ${ENDCOLOR}"
-apt update && apt upgrade -y && apt autoremove -y
+apt update && apt-fast upgrade -y && apt-fast autoremove -y
 echo -e "${GREEN} UPGRADE COMPLETE ${ENDCOLOR}"
 sudo -v
 
 echo -e "${BLUE} INSTALLING TLP AND THERMALD ${ENDCOLOR}"
 add-apt-repository ppa:linrunner/tlp -y
 apt update
-apt install tlp tlp-rdw -y
-apt install thermald -y
+apt-fast install tlp tlp-rdw -y
+apt-fast install thermald -y
 echo -e "${GREEN} INSTALLED TLP AND THERMALD ${ENDCOLOR}"
 sudo -v
 
 echo -e "${BLUE} INSTALLING PRELOAD ${ENDCOLOR}"
-apt install preload -y
+apt-fast install preload -y
 echo -e "${GREEN} INSTALLED PRELOAD ${ENDCOLOR}"
 sudo -v
 
 echo -e "${YELLOW}----------------------------------------- INSTALLING BASIC PROGRAMMING LANGUAGES -----------------------------------------${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING G++ AND GCC ${ENDCOLOR}"
-apt install gcc -y
-apt install g++ -y
+apt-fast install gcc -y
+apt-fast install g++ -y
 echo -e "${GREEN} INSTALLed G++ AND GCC ${ENDCOLOR}"
 sudo -v
 
 echo -e "${BLUE} INSTALLING JAVA ${ENDCOLOR}"
-apt install default-jdk -y
+apt-fast install default-jdk -y
 echo -e "${GREEN} INSTALLED JAVA ${ENDCOLOR}"
 sudo -v
 
 echo -e "${BLUE} INSTALLING PYTHON ${ENDCOLOR}"
-apt install python -y
-apt install python3 -y
+apt-fast install python -y
+apt-fast install python3 -y
 echo -e "${GREEN} INSTALLED PYTHON ${ENDCOLOR}"
 sudo -v
 
 echo -e "${BLUE} INSTALLING PIP ${ENDCOLOR}"
-apt install python-pip -y
-apt install python3-pip -y
+apt-fast install python-pip -y
+apt-fast install python3-pip -y
 echo -e "${GREEN} INSTALLED PIP ${ENDCOLOR}"
 sudo -v
 
@@ -69,11 +69,11 @@ read -p "INSTALL WEB-DEVELOPMENT STACK (MERN) Continue? (Y/N): " confirm
 if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]
 then
 echo -e "${BLUE} INSTALLING NODE ${ENDCOLOR}"
-apt install nodejs -y
+apt-fast install nodejs -y
 node -v
 echo -e "${GREEN} INSTALLED NODE ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING NPM ${ENDCOLOR}"
-apt install npm -y
+apt-fast install npm -y
 npm -v
 echo -e "${GREEN} INSTALLED NPM ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING REACT ${ENDCOLOR}"
@@ -84,9 +84,12 @@ echo -e "${BLUE} INSTALLING NODEMON ${ENDCOLOR}"
 npm -g i nodemon
 echo -e "${GREEN} INSTALLED NODEMON ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING MONGODB ${ENDCOLOR}"
-apt install mongodb
-systemctl enable mongodb
-systemctl status mongodb
+wget -qO- https://www.mongodb.org/static/pgp/server-5.0.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/mongo.gpg
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+apt-fast update
+apt-fast install mongodb-org -y
+systemctl enable mongod
+systemctl status mongod
 echo -e "${GREEN} INSTALLED MONGODB ${ENDCOLOR}"
 echo -e "${GREEN} INSTALLED WEB-DEVELOPMENT STACK (MERN) ${ENDCOLOR}"
 fi
@@ -126,12 +129,12 @@ dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 sudo -u $cuser wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
-apt install google-chrome-stable
+apt-fast install google-chrome-stable
 echo -e "${GREEN} INSTALLED GOOGLE CHROME ${ENDCOLOR}"
 sudo -v
 
 echo -e "${BLUE} INSTALLING GIT ${ENDCOLOR}"
-apt install git
+apt-fast install git
 git --version
 echo -e "${LIGHTB} ENTER YOUR GIT USERNAME (firstname lastname): ${ENDCOLOR}"
 read username
@@ -159,10 +162,10 @@ done
 echo -e "${BLUE} INSTALLED AND CONFIGURED GIT${ENDCOLOR}"
 echo -e "${BLUE} ADDING UNIVERSAL CODECS${ENDCOLOR}"
 add-apt-repository multiverse -y
-apt update
+apt-fast update
 sudo -v
 
-apt install ubuntu-restricted-extras -y
+apt-fast install ubuntu-restricted-extras -y
 echo -e "${GREEN} ADDED UNIVERSAL CODECS ${ENDCOLOR}"
 echo -e "${BLUE} INSTALLING VLC MEDIA PLAYER ${ENDCOLOR}"
 snap install vlc
@@ -177,7 +180,7 @@ echo -e "${GREEN} INSTALLED VISUAL STUDIO CODE ${ENDCOLOR}"
 
 echo -e "${YELLOW}----------------------------------------- INSTALLING DATABASES -----------------------------------------"
 echo -e "${BLUE} INSTALLING MYSQL ${ENDCOLOR}"
-apt install mysql-server -y
+apt-fast install mysql-server -y
 sudo -v
 
 systemctl enable mysql-server
@@ -186,7 +189,7 @@ echo -e "${GREEN} INSTALLED MYSQL ${ENDCOLOR}"
 
 echo -e "${YELLOW}----------------------------------------- FINISHING UP -----------------------------------------"
 echo -e "${BLUE} CHECKING FOR FINAL UPGRADES IF ANY ${ENDCOLOR}"
-apt update && apt upgrade -y && apt autoremove -y
+apt-fast update && apt-fast upgrade -y && apt-fast autoremove -y
 echo -e "${RED} IT IS RECOMMENDED TO REBOOT THE SYSTEM AFTER SO MANY CONFIGURATIONS AND INSTALLS REBOOT NOW? (Y/N): "
 read confirm
 if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]
