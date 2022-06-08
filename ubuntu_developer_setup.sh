@@ -178,6 +178,11 @@ sudo -v
 
 echo -e "${GREEN} INSTALLED VISUAL STUDIO CODE ${ENDCOLOR}"
 
+
+echo -e "${BLUE} INSTALLING POSTMAN ${ENDCOLOR}"
+snap install postman
+echo -e "${GREEN} INSTALLED POSTMAN ${ENDCOLOR}"
+
 echo -e "${YELLOW}----------------------------------------- INSTALLING DATABASES -----------------------------------------"
 echo -e "${BLUE} INSTALLING MYSQL ${ENDCOLOR}"
 apt-fast install mysql-server -y
