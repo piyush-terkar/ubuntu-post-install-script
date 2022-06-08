@@ -193,6 +193,18 @@ systemctl status mysql
 echo -e "${GREEN} INSTALLED MYSQL ${ENDCOLOR}"
 
 echo -e "${YELLOW}----------------------------------------- FINISHING UP -----------------------------------------"
+echo -e "${BLUE} INSTALLING LOCATE COMMAND ${ENDCOLOR}"
+apt-fast install plocate -y
+echo -e "${GREEN} INSTALLED LOCATE ${ENDCOLOR}"
+echo -e "${BLUE} INSTALLING NET-TOOLS ${ENDCOLOR}"
+apt-fast install net-tools -y
+echo -e "${GREEN} INSTALLED NET-TOOLS ${ENDCOLOR}"
+echo -e "${BLUE} INSTALLING OPENSSH ${ENDCOLOR}"
+apt-fast install openssh-server -y
+echo -e "${GREEN} INSTALLED OPENSSH ${ENDCOLOR}"
+echo -e "${BLUE} ENABLING FIREWALL ${ENDCOLOR}"
+ufw enable
+echo -e "${GREEN} SYSTEM SECURED ${ENDCOLOR}"
 echo -e "${BLUE} CHECKING FOR FINAL UPGRADES IF ANY ${ENDCOLOR}"
 apt-fast update && apt-fast upgrade -y && apt-fast autoremove -y
 echo -e "${RED} IT IS RECOMMENDED TO REBOOT THE SYSTEM AFTER SO MANY CONFIGURATIONS AND INSTALLS REBOOT NOW? (Y/N): "
