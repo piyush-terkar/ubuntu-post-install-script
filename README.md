@@ -34,7 +34,7 @@ To run the script, follow these steps:
 
 Clone the Git repository:
 
-```git clone https://github.com/yourusername/repository.git```
+```git clone https://github.com/piyush-terkar/ubuntu-post-install-script.git```
 
 Navigate to the cloned repository directory:
 
@@ -42,11 +42,11 @@ cd repository
 Make the script executable:
 
 
-```chmod +x setup_script.sh```
+```chmod +x ubuntu_developer_setup.sh```
 
 Run the script:
 
-```./setup_script.sh```
+```./ubuntu_developer_setup.sh```
 
 Follow the prompts and provide necessary inputs when prompted by the script.
 
